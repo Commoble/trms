@@ -1,0 +1,46 @@
+html {
+    background-color: midnightblue;
+}
+
+body {
+    background-color: mintcream;
+    margin-left: 2cm;
+    margin-right: 2cm;
+    padding: 1cm;
+    padding-top: 10px;
+}
+
+input {
+    margin: 2px;
+}
+
+button {
+    margin: 10px;
+    background-color: floralwhite;
+    padding: 7px;
+    
+}
+button:hover {
+    background-color: rgb(240, 240, 240);
+    
+}
+
+#login-div {
+    border-style: groove;
+    border-radius: 2px;
+    width: 10cm;
+    text-align: center;
+    padding: 5px;
+}
+
+#status-div {
+    margin: 10px;
+}
+
+.your-request-expansion-header, .approvable-request-expansion-header {
+    font-weight: bold;
+}
+
+.login-label {
+    width: 100px;
+}

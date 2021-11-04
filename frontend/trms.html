@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuition Reimbursement Management System</title>
+    <!-- Bootstrap styles -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel='stylesheet' href='trms.css'>
+</head>
+<body>
+    <h1 id='trms-title'>Tuition Reimbursement Management System</h1> 
+    <hr>
+    <div id='login-div'>
+        <h4>Log in to TRMS:</h4>
+        <div>
+            <label for='username-input' class='login-label'>Username:</label><input id='username-input' type='text' class='login-input' maxlength='50' placeholder='Username' autofocus=true>
+        </div>
+        <div>
+            <label for='password-input' class='login-label'>Password:</label><input id='password-input' type='password' class='login-input' maxlength='50' placeholder='Password'>
+        </div>
+        <div>
+            <button id = 'login-button' class='login-input'>Log In</button>
+        </div>
+    </div>
+    <div id='status-div'>
+        <p>Log into the Tuition Reimbursement Management System to create or manage reimbursement requests.</p>
+    </div>
+    <div id='requests-div' hidden='true'>
+        <div id='new-request-div'>
+            <button id='init-new-request-form-button'>Create new reimbursement request?</button>
+            <div id='new-request-form-div' hidden='true'>
+                <table class='table'>
+                    <tr>
+                        <td><label for='select-event-type'>Event Type:</label></td>
+                        <td><select id="select-event-type" class='new-request-input'></select></td>
+                    </tr>
+                    <tr>
+                        <td><label for='select-grading-format'>Grading Format:</label></td>
+                        <td><select id='select-grading-format' class='new-request-input'></select></td>
+                    </tr>
+                    <tr>
+                        <td><label for='passing-grade'>Passing Grade:</label></td>
+                        <td><input type='text' id = 'passing-grade-input' class='new-request-input'/></td>
+                    </tr>
+                    <tr>
+                        <td><label for='event-date-input'>Event Date:</label></td>
+                        <td><input type='date' id = 'event-date-input' class='new-request-input'/></td>
+                    </tr>
+                    <tr>
+                        <td><label for='event-address-input'>Event Location:</label></td>
+                        <td><input type='text' id = 'event-address-input' length=100 class='new-request-input'/></td>
+                    </tr>
+                    <tr>
+                        <td><label for='event-cost-input'>Event Cost:</label></td>
+                        <td><input type='text' id = 'event-cost-input' length=50 class='new-request-input'/></td>
+                    </tr>
+                    <tr>
+                        <td>Remaining Reimbursement This Year:</td>
+                        <td><input type='text' id = 'remaining-reimbursement-display' disabled='true'/></td>
+                    </tr>
+                    <tr>
+                        <td>Projected Reimbursement:</td>
+                        <td><input type='text' id = 'projected-reimbursement-display' disabled='true'/></td>
+                    </tr>
+                    <tr>
+                        <td><label for='event-description-input'>Event Description:</label></td>
+                        <td><textarea id = 'event-description-input' length=500 class='new-request-input'></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label for='work-related-justification-input'>Work-Related Justification:</label></td>
+                        <td><textarea id = 'work-related-justification-input' length=500 class='new-request-input'></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label for='work-time-missed-input'>Work Time Missed (Optional):</label></td>
+                        <td> <textarea id = 'work-time-missed-input' length=500 class='new-request-input'></textarea></td>
+                    </tr>
+                </table>
+                <button id='submit-new-request-button' class='new-request-input'>Submit Reimbursement Request</button>
+            </div>
+        </div>
+        <div id='your-requests-div'>
+            <hr>
+            <h2>Your submitted requests:</h2>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Submission Date</th>
+                        <th>Event Description</th>
+                        <th>Event Date</th>
+                        <th>Request Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id='your-requests-table-body'>
+
+                </tbody>
+            </table>
+        </div>
+        <div id='your-request-expansion-div' hidden='true'>
+            <table class='table'>
+                <tr><td class='your-request-expansion-header'>Submission Date</td><td id='your-request-expansion-submission-date'></td></tr>
+                <tr><td class='your-request-expansion-header'>Event Description</td><td id='your-request-expansion-event-description'></td></tr>
+                <tr><td class='your-request-expansion-header'>Event Date</td><td id='your-request-expansion-event-date'></td></tr>
+                <tr><td class='your-request-expansion-header'>Request Status</td><td id='your-request-expansion-status'></td></tr>
+                <tr><td class='your-request-expansion-header'>Event Type</td><td id='your-request-expansion-event-type'></td></tr>
+                <tr><td class='your-request-expansion-header'>Event Cost</td><td id='your-request-expansion-event-cost'></td></tr>
+                <tr><td class='your-request-expansion-header'>Reimbursement Amount</td><td id='your-request-expansion-reimbursement-amount'></td></tr>
+                <tr><td class='your-request-expansion-header'>Grading Format</td><td id='your-request-expansion-grading-format'></td></tr>
+                <tr><td class='your-request-expansion-header'>Passing Grade</td><td id='your-request-expansion-passing-grade'></td></tr>
+                <tr><td class='your-request-expansion-header'>Work-Related Justification</td><td id='your-request-expansion-work-related-justification'></td></tr>
+                <tr><td class='your-request-expansion-header'>Work Time Missed</td><td id='your-request-expansion-work-time-missed'></td></tr>
+            </table>
+            <h3>Approvals:</h3>
+            <table id='your-request-expansion-approvals-table' class='table'>
+                <thead>
+                    <tr>
+                        <th>Approver</th>
+                        <th>Approval Level</th>
+                        <th>Approved?</th>
+                        <th>Approval Date</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody id='your-request-expansion-approvals-table-body'></tbody>
+            </table>
+        </div>
+        <div id='approvable-requests-div' hidden=true>
+            <hr>
+            <h2>Your approvable requests:</h2>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Requestor</th> 
+                        <th>Submission Date</th>
+                        <th>Event Description</th>
+                        <th>Event Date</th>
+                        <th>Request Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id='approvable-requests-table-body'>
+
+                </tbody>
+            </table>
+        </div>
+        <div id='approvable-request-expansion-div' hidden='true'>
+            <table class='table'>
+                <tr><td class='approvable-request-expansion-header'>Employee</td><td id='approvable-request-expansion-employee'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Submission Date</td><td id='approvable-request-expansion-submission-date'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Event Description</td><td id='approvable-request-expansion-event-description'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Event Date</td><td id='approvable-request-expansion-event-date'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Request Status</td><td id='approvable-request-expansion-status'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Event Type</td><td id='approvable-request-expansion-event-type'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Event Cost</td><td id='approvable-request-expansion-event-cost'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Reimbursement Amount</td><td id='approvable-request-expansion-reimbursement-amount'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Grading Format</td><td id='approvable-request-expansion-grading-format'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Passing Grade</td><td id='approvable-request-expansion-passing-grade'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Work-Related Justification</td><td id='approvable-request-expansion-work-related-justification'></td></tr>
+                <tr><td class='approvable-request-expansion-header'>Work Time Missed</td><td id='approvable-request-expansion-work-time-missed'></td></tr>
+            </table>
+            <h3>Approvals:</h3>
+            <table id='approvable-request-expansion-approvals-table' class='table'>
+                <thead>
+                    <tr>
+                        <th>Approver</th>
+                        <th>Approval Level</th>
+                        <th>Approved?</th>
+                        <th>Approval Date</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody id='approvable-request-expansion-approvals-table-body'></tbody>
+            </table>
+            <div id='approval-submission-div' hidden=true>
+                <p>Approve this reimbursement request?</p>
+                <table class='table'>
+                    <tr>
+                        <td><label for='approve-radio'>Approved</label></td>
+                        <td><input type='radio' id='approve-radio' name='approved-denied-radio' value='approved' checked/></td>
+                    </tr>
+                    <tr>
+                        <td><label for='denied-radio'>Denied</label></td>
+                        <td><input type='radio' id='denied-radio' name='approved-denied-radio' value='denied'/></td>
+                    </tr>
+                    <tr>
+                        <td><label for='approval-submission-comments'>Comments:</label></td>
+                        <td><textarea id='approval-submission-comments'></textarea></td>
+                    </tr>
+                </table>
+                <button id='approval-submission-button'>Submit Approval</button>
+            </div>
+            <div id='award-submission-div' hidden=true>
+                <button id='award-submission-button' disabled=true>Award Request</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<script src='trms.js'></script>
+</html>
