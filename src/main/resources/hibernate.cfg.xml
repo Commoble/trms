@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Important Properties -->
+        <property name="hibernate.connection.driver_class">
+            org.postgresql.Driver
+        </property>
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.PostgreSQL10Dialect
+        </property>
+        <property name="hibernate.connection.url">
+            YOUR_DATABSE_URL?currentSchema=trms
+        </property>
+        <property name="hibernate.connection.username">
+            YOUR_DATABASE_USERNAME
+        </property>
+        <property name="hibernate.connection.password">
+            YOUR_DATABASE_PASSWORD
+        </property>
+
+        <!-- Optional Properties -->
+
+        <!-- if true, hibernate will log sql calls to the console -->
+        <property name="show-sql">
+            true
+        </property>
+        <!-- Sets the DDL behavior of hibernate (whether and how it creates tables) -->
+        <property name="hbm2ddl.auto">
+            <!-- Validate - table structure is read-only
+                will only confirm whether table structure matches java structure
+                preferred for production -->
+            validate
+            <!-- Other values, mostly helpful for development/testing purposes:
+                'update' will alter the tables if a mismatch exists
+                'create' will create tables if they don't exist
+                there should be a drop and create as well
+            -->
+        </property>
+
+        <!-- Class Mappings -->
+        <!-- <mapping resource="department.hbm.xml" /> xml mapping -->
+        <mapping class="com.revature.trms.models.Approval" />
+        <mapping class="com.revature.trms.models.Attachment" />
+        <mapping class="com.revature.trms.models.Department" />
+        <mapping class="com.revature.trms.models.Employee" />
+        <mapping class="com.revature.trms.models.EventType" />
+        <mapping class="com.revature.trms.models.GradingFormat" />
+        <mapping class="com.revature.trms.models.ReimbursementRequest" />
+        <mapping class="com.revature.trms.models.Role" />
+    </session-factory>
+</hibernate-configuration>
